@@ -5,6 +5,7 @@ import Navbar from '../../components/navbar';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
+import Message from '../../components/message';
 
 
 const Main = () => {
@@ -12,15 +13,18 @@ const Main = () => {
 //          estado     accion / update                  valor inicial
     const [inputValue, setInputValue] = React.useState('0');
 
+    const noStock = () => {
+            return (
+                <div>
+                    <Message />
+                </div>)
+    }   
+    
     const handleClick = () => {
         if (isNaN(inputValue)) {
             return;
         }
-        inputValue < 5 ? setInputValue(parseInt(inputValue) + 1) :
-<Alert severity="error">
-  <AlertTitle>Error</AlertTitle>
-  This is an error alert — <strong>check it out!</strong>
-</Alert>;
+        inputValue < 5 ? setInputValue(parseInt(inputValue) + 1) : noStock()
     }
 
     const resetClick = () => {
@@ -32,8 +36,8 @@ const Main = () => {
     }
     return (
         <div className='contenedor' sx={{ display: 'flex', flexDirection: 'column'}}>
-            <Navbar />   
-            <ButtonCustom label={'SUMAR 1'} color={'red'} handleClick={handleClick} />
+            <Navbar label={inputValue} />   
+            <ButtonCustom label={'Agregar al carrito'} color={'red'} handleClick={handleClick} />
             <ButtonCustom label={'Reiniciar'} color={'red'} handleClick={resetClick} />
             <div>
                                                         {/* evento que recibe el valor en el cambio */}
