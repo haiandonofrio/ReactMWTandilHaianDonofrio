@@ -35,15 +35,18 @@ const Main = () => {
     setInputValue(event.target.value)
     }
     return (
-        <div className='contenedor' sx={{ display: 'flex', flexDirection: 'column'}}>
+        <section>
             <Navbar label={inputValue} />   
+            <div className='contenedor' style={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
+            <h2 style={{textAlign:'center', color:'white'}}>Somos una empresa dedicada a la manufacturación de cuchillos regionales!</h2>
             <ButtonCustom label={'Agregar al carrito'} color={'red'} handleClick={handleClick} />
             <ButtonCustom label={'Reiniciar'} color={'red'} handleClick={resetClick} />
             <div>
                                                         {/* evento que recibe el valor en el cambio */}
                 <input style={{}} value={inputValue} onChange={handlevalue} />
             </div>
-        </div>
+            </div>
+            </section>
     )
 }
 
