@@ -2,10 +2,9 @@ import React from 'react';
 import '../index.css';
 import ButtonCustom from '../../components/button';
 import Navbar from '../../components/navbar';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
 import Message from '../../components/message';
+import { Box, Tab, Tabs, Typography, ProductCard } from '@mui/material';
+import { Padding } from '@mui/icons-material';
 
 
 const Main = () => {
@@ -34,19 +33,39 @@ const Main = () => {
     const handlevalue = (event) => {
     setInputValue(event.target.value)
     }
+
+    const [currentCategory, setCurrentCat] = React.useState('Cuchillos')
+
+    const handleChange  = (_,value) => {
+        setCurrentCat(value);
+    }
     return (
         <section>
             <Navbar label={inputValue} />   
-            <div className='contenedor' style={{ display: 'flex', flexDirection: 'column', alignItems:'center'}}>
-            <h2 style={{textAlign:'center', color:'white'}}>Somos una empresa dedicada a la manufacturación de cuchillos regionales!</h2>
-            <ButtonCustom label={'Agregar al carrito'} color={'red'} handleClick={handleClick} />
-            <ButtonCustom label={'Reiniciar'} color={'red'} handleClick={resetClick} />
-            <div>
-                                                        {/* evento que recibe el valor en el cambio */}
-                <input style={{}} value={inputValue} onChange={handlevalue} />
+            <div className='contenedor' style={{ display: 'flex', flexDirection: 'column', alignItems:'center', backgroundColor:'white'}}>
+                <h2 style={{ textAlign: 'center', color: 'white' }}>Somos una empresa dedicada a la manufacturación de cuchillos regionales!</h2>
+                <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+                    <Tabs value={currentCategory} aria-label='tabs productos' onChange={handleChange}>
+                        <Tab label="Cuchillos de Madera" value={'Cuchillo'} />
+                        <Tab label="Conjuntos" value={'Conjunto'} />
+                        <Tab label="Combinados" value={'Combinado'} />
+                    </Tabs>
+                </Box>
+                {/* CUCHILLO DE MADEIRA */}
+                <Box>
+                    <Typography>
+                        {currentCategory}
+                    </Typography>
+                    <ButtonCustom label={`Agregar ${currentCategory} al carrito`} color={'red'} handleClick={handleClick} />
+                    <ButtonCustom label={'Reiniciar'} color={'red'} handleClick={resetClick} />
+                </Box>
+
+                <div style={{paddingTop: '20px'}}>
+                                                            {/* evento que recibe el valor en el cambio */}
+                    <input style={{}} value={inputValue} onChange={handlevalue} />
+                </div>
             </div>
-            </div>
-            </section>
+        </section>
     )
 }
 

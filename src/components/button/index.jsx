@@ -27,7 +27,7 @@ const ButtonCustom = ({ label , color, handleClick }) => {
     // console.log(props)
     return (
         <div>
-            <button onClick={handleClick} style={{ ...styles2, backgroundColor: color }}>
+            <button onClick={handleClick} style={{ ...styles2, backgroundColor: color, margin:'20px' }}>
                 {label}
             </button>   
 
