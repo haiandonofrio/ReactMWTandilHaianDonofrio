@@ -14,18 +14,16 @@ const Main = () => {
 
     const noStock = () => {
             return (
-                <div>
-                    <Message />
-                </div>)
+                alert('No stock'))
     }   
-    
+//agregar carrito
     const handleClick = () => {
         if (isNaN(inputValue)) {
             return;
         }
         inputValue < 5 ? setInputValue(parseInt(inputValue) + 1) : noStock()
     }
-
+//reiniciar
     const resetClick = () => {
     setInputValue(0);
     }
@@ -65,6 +63,7 @@ const Main = () => {
                                                             {/* evento que recibe el valor en el cambio */}
                     <input style={{}} value={inputValue} onChange={handlevalue} />
                 </div>
+
             </div>
         </section>
     )

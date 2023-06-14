@@ -1,27 +1,46 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Popper from '@mui/material/Popper';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
-export default function Message() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function AlertDialog() {
+  const [open, setOpen] = React.useState(false);
 
-  const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popper' : undefined;
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
-      <button aria-describedby={id} type="button" onClick={handleClick}>
-        Toggle Popper
-      </button>
-      <Popper id={id} open={open} anchorEl={anchorEl}>
-        <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
-          The content of the Popper.
-        </Box>
-      </Popper>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
