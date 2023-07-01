@@ -55,12 +55,11 @@ const Main = () => {
           Somos una empresa dedicada a la manufacturación de cuchillos
           regionales!
         </h2>
+        
         <TabCat/>
-        {/* CUCHILLO DE MADEIRA */}
+
         <Box>
-          <Typography>
-            {/* {currentCategory} A VER COMO LO HACE MAS ADELANTE EL PROFE*/}   
-          </Typography>
+
           <ButtonCustom
             label={`Agregar al carrito`}
             color={'red'}

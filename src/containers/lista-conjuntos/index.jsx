@@ -1,6 +1,6 @@
 import React from 'react'
-import { getCuchi } from './products'
 import SeccionList from '../../components/lista-elementos'
+import { fakelist } from '../../sdk/fakeapi'
 
 export default function SeccionConjuntos() {
     const [items, setitems] = React.useState([])
@@ -8,7 +8,8 @@ export default function SeccionConjuntos() {
 
     React.useEffect(() => {
         setLoading(true)
-        getCuchi()
+        fakelist(8)
+            .then(res => res.json())
             .then((res) => {
                 console.log(res)
                 setitems(res)

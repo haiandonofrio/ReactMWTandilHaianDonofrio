@@ -5,30 +5,34 @@ import {
     Typography,
     ProductCard,
     TextField,
-    Card
+    Card,
+    LinearProgress,
+    styled,
 } from '@mui/material'
 import React from 'react'
 import Carditem from '../card'
-import { getCuchi } from '../../containers/lista-combinados/products'
+import CircularProgressTabs from '../circular-progress'
+import Container from '../container'
+
 
 export default function SeccionList({ loading, items }) {
 
     return (
-        <Box display={'flex'} justifyContent={'center'} gap={5}>
+        <Container>
             {Boolean(loading)
-                ? <Typography>Cargando...</Typography>
+                ? <CircularProgressTabs />
                 : items?.map((item, index) => {
                     return (
                         <Carditem
-                            key={index + item.nombre}
-                            img={item.imageURL}
-                            name={item.nombre}
-                            id={item.id}
-                            price={item.precio}
-                            description={item.nombre}
+                            key={index + item.title}
+                            img={item.image}
+                            title={item.title}
+                            stock={item.stock}
+                            price={item.price}
+                            description={item.description}
                         />
                     )
                 })}
-        </Box>
+        </Container>
     )
 }

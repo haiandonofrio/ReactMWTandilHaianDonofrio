@@ -2,31 +2,31 @@ import { Promise } from "q";
 
 const cuchis = [{
     id: 1,
-    nombre: 'cuchi1',
-    imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
-    cantidad: 10,
-    precio: 1500
+    title: 'cuchi1',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
+    stock: 10,
+    price: 1500
 },
 {
     id: 2,
-    nombre: 'cuchi2',
-    imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
-    cantidad: 0,
-    precio: 1860
+    title: 'cuchi2',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
+    stock: 0,
+    price: 1860
     },
 {
     id: 3,
-    nombre: 'cuchi3',
-    imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
-    cantidad: 17,
-    precio: 2500
+    title: 'cuchi3',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
+    stock: 17,
+    price: 2500
     },
 {
     id: 4,
-    nombre: 'cuchi4',
-    imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
-    cantidad: 5,
-    precio: 3500
+    title: 'cuchi4',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65d-t7nhFWd98coa7DRytc1hLgKC1MKdzJw&usqp=CAU',
+    stock: 5,
+    price: 3500
 },
 
 ]

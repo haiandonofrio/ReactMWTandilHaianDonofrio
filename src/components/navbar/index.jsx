@@ -6,9 +6,14 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Cartwidget from '../cartwidget';
-
+import logo from './logo.png'
+import { Button } from '@mui/material';
 export default function Navbar({cart}) {
 
+   const handleRedirect = () => {
+    // window.location = 'https://youtube.com' 
+  }
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -22,10 +27,13 @@ export default function Navbar({cart}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          <Button onClick={handleRedirect}>
+            <Box component='img' src={logo} alt='logo' sx={{ width: '100px', padding: 2 }} />
+          </Button>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 2 }}>
             MW TANDIL
           </Typography>
-          <Cartwidget  CantCarr={cart}/>
+          <Cartwidget CantCarr={cart} />
         </Toolbar>
       </AppBar>
     </Box>

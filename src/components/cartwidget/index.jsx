@@ -8,7 +8,7 @@ export default function Cartwidget ({ CantCarr }) {
   return (
     <IconButton>
       <Badge badgeContent={CantCarr} max={999} color='error' min={0} showZero>
-        <ShoppingCartIcon sx={{ color: 'white' }} />
+        <ShoppingCartIcon sx={{ color: 'white', width: '50px', height: '50px' }} />
       </Badge>
     </IconButton>
   )

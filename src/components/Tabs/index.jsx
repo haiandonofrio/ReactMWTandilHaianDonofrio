@@ -11,9 +11,10 @@ import SeccionList from '../lista-elementos'
 import SeccionCuchillos from '../../containers/lista-cuchillos'
 import SeccionConjuntos from '../../containers/lista-conjuntos'
 import SeccionCombinados from '../../containers/lista-combinados'
+import Container from '../container'
 
 export default function TabCat() {
-    const [currentCategory, setCurrentCat] = React.useState('Cuchillos')
+    const [currentCategory, setCurrentCat] = React.useState('Cuchillo')
 
     const handleChange = (_, value) => {
         setCurrentCat(value)
@@ -34,7 +35,7 @@ export default function TabCat() {
 
     return (
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Box>
+            <Container>
                 <Tabs
                     value={currentCategory}
                     aria-label='tabs productos'
@@ -44,7 +45,7 @@ export default function TabCat() {
                     <Tab label='Conjuntos' value={'Conjunto'} />
                     <Tab label='Combinados' value={'Combinado'} />
                 </Tabs>
-            </Box>
+            </Container>
             {selectedsection(currentCategory)}
         </Box>
     )
