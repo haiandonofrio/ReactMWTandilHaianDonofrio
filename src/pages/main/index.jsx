@@ -4,6 +4,8 @@ import ButtonCustom from '../../components/button'
 import Navbar from '../../components/navbar'
 import { Box, Tab, Tabs, Typography, ProductCard, TextField } from '@mui/material'
 import TabCat from '../../components/Tabs'
+import { FlexCenterCol } from '../../components/container/contenedor'
+import MainText from '../../components/main-text'
 
 
 
@@ -33,32 +35,21 @@ const Main = () => {
 
 
 
-//   const handleChange = (_, value) => {
-//     setCurrentCat(value)
-//     setInputValue(0)
-//     }
-    
+  //   const handleChange = (_, value) => {
+  //     setCurrentCat(value)
+  //     setInputValue(0)
+  //     }
+
   return (
     <section>
       <Navbar cart={inputValue} />
 
-      <div
-        className='contenedor'
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          backgroundColor: 'white'
-        }}
-      >
-        <h2 style={{ textAlign: 'center', color: 'white' }}>
-          Somos una empresa dedicada a la manufacturación de cuchillos
-          regionales!
-        </h2>
-        
-        <TabCat/>
+      <FlexCenterCol sx={{backgroundColor:'white'}}>
+        <MainText />
 
-        <Box>
+        <TabCat />
+
+        {/* <Box>
 
           <ButtonCustom
             label={`Agregar al carrito`}
@@ -75,7 +66,7 @@ const Main = () => {
         <Box style={{ paddingTop: '20px' }}>
           {/* evento que recibe el valor en el cambio */}
 
-          <TextField
+          {/* <TextField
             id='outlined-number'
             label='Cantidad '
             type='number'
@@ -85,8 +76,8 @@ const Main = () => {
               shrink: true
             }}
           />
-        </Box>
-      </div>
+        </Box> */} 
+      </FlexCenterCol>
     </section>
   )
 }

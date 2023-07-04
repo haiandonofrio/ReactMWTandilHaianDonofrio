@@ -7,27 +7,31 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/material'
 import { Centrado } from '../container/contenedor'
+import { useDebounce } from '../../hooks/useDebounce'
+
+
+const maxinput = 20
 
 export default function Carditem({ id, img, title, stock, price, description }) {
   const [inputValue, setInputValue] = React.useState(0)
-
+  
   const noStock = () => {
-    // return alert('No stock')
+    return alert('No stock')
   }
 
   // agregar carrito
-  const handleClick = (stocks) => {
-    if (isNaN(inputValue)) {
-      return
-    }
-    inputValue <= 15 ? setInputValue(parseInt(inputValue) + 1) : noStock()
+  const handleClick = () => {
+    // if (isNaN(inputValue)) {
+    //   return
+    // }
+    inputValue < maxinput ? setInputValue(inputValue + 1) : noStock()
   }
 
   const handleReset = () => {
-    if (isNaN(inputValue)) {
-      return
-    }
-    setInputValue(parseInt(inputValue) - 1) 
+    // if (isNaN(inputValue)) {
+    //   return
+    // }
+    inputValue > 0 ? setInputValue(inputValue - 1) : setInputValue(0)
   }
 
   return (
@@ -50,12 +54,13 @@ export default function Carditem({ id, img, title, stock, price, description }) 
           </Typography>
         </CardContent>
         <Centrado>
-          <Button size='small' onClick={handleClick(15)}>Agregar al carrito</Button>
+          <Button size='small' onClick={handleClick}>Agregar al carrito</Button>
+          
           <Button size='small'>Detalles</Button>
         </Centrado>
         <Centrado>
           <Typography variant='body' color='text'>
-            Cantidad: {inputValue}
+            Cantidad: {useDebounce(inputValue,500)}
           </Typography>
           <Button size='small' onClick={handleReset}>Quitar</Button>
         </Centrado>

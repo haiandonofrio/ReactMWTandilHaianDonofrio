@@ -21,3 +21,12 @@ export const Centrado = styled(Box)(({ theme }) => ({
   flexDirection: "row",
   paddingBottom: 2,
 }));
+
+export const FlexCenterCol = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  gap: 2,
+  flexWrap: "wrap",
+  flexDirection: "column",
+  paddingBottom: 2,
+}));
