@@ -15,7 +15,7 @@ import CircularProgressTabs from '../circular-progress'
 import Container from '../container'
 
 
-export default function SeccionList({ loading, items }) {
+export default function ProductList({ items, loading }) {
 
     return (
         <Container>
@@ -25,6 +25,7 @@ export default function SeccionList({ loading, items }) {
                     return (
                         <Carditem
                             key={index + item.title}
+                            item={item}
                             img={item.image}
                             title={item.title}
                             stock={item.stock}

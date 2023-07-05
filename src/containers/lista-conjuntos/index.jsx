@@ -1,6 +1,6 @@
 import React from 'react'
 import SeccionList from '../../components/lista-elementos'
-import { fakelist } from '../../sdk/fakeapi'
+import { fakelist } from '../../sdk/Products'
 
 export default function SeccionConjuntos() {
     const [items, setitems] = React.useState([])

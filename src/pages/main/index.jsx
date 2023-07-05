@@ -5,7 +5,9 @@ import Navbar from '../../components/navbar'
 import { Box, Tab, Tabs, Typography, ProductCard, TextField } from '@mui/material'
 import TabCat from '../../components/Tabs'
 import { FlexCenterCol } from '../../components/container/contenedor'
-import MainText from '../../components/main-text'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import ItemContainer from '../../containers/items-container'
+import ItemDetailContainer from '../../containers/item-detail'
 
 
 
@@ -41,44 +43,22 @@ const Main = () => {
   //     }
 
   return (
-    <section>
-      <Navbar cart={inputValue} />
+    <BrowserRouter>
+      <section>
 
-      <FlexCenterCol sx={{backgroundColor:'white'}}>
-        <MainText />
+        <Navbar cart={inputValue} />
 
-        <TabCat />
-
-        {/* <Box>
-
-          <ButtonCustom
-            label={`Agregar al carrito`}
-            color={'red'}
-            handleClick={handleClick}
-          />
-          <ButtonCustom
-            label={'Reiniciar'}
-            color={'red'}
-            handleClick={resetClick}
-          />
-        </Box>
-
-        <Box style={{ paddingTop: '20px' }}>
-          {/* evento que recibe el valor en el cambio */}
-
-          {/* <TextField
-            id='outlined-number'
-            label='Cantidad '
-            type='number'
-            value={inputValue}
-            onChange={handlevalue}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-        </Box> */} 
-      </FlexCenterCol>
-    </section>
+        <FlexCenterCol sx={{ backgroundColor: 'white' }}>
+          
+          <Routes>
+            <Route path="/" element={<ItemContainer />} />
+            <Route path={'/products/:category'} element={<ItemContainer/>}/>
+            <Route path={'/product/:id'} element={<ItemDetailContainer />} />
+          </Routes>
+          <TabCat />
+        </FlexCenterCol>
+      </section>
+    </BrowserRouter >
   )
 }
 

@@ -8,10 +8,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Cartwidget from '../cartwidget';
 import logo from './logo.png'
 import { Button } from '@mui/material';
-export default function Navbar({cart}) {
+import { useNavigate } from 'react-router-dom';
 
+
+export default function Navbar({cart}) {
+  const navigate = useNavigate();
    const handleRedirect = () => {
-    // window.location = 'https://youtube.com' 
+     navigate('/'); 
   }
   
   return (

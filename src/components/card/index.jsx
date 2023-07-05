@@ -8,13 +8,24 @@ import Typography from '@mui/material/Typography'
 import { Box } from '@mui/material'
 import { Centrado } from '../container/contenedor'
 import { useDebounce } from '../../hooks/useDebounce'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 
 const maxinput = 20
 
-export default function Carditem({ id, img, title, stock, price, description }) {
+export default function Carditem({ key, item }) {
   const [inputValue, setInputValue] = React.useState(0)
+  const currentValue = React.useRef({ key })
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    console.log(currentValue.current);
+  }, []);
   
+  const handleDetails = (evt) => {
+    console.log(evt )
+    // navigate('/product/' + { id })
+  }
   const noStock = () => {
     return alert('No stock')
   }
@@ -34,29 +45,31 @@ export default function Carditem({ id, img, title, stock, price, description }) 
     inputValue > 0 ? setInputValue(inputValue - 1) : setInputValue(0)
   }
 
+
+
   return (
     <Box>
       <Card sx={{ maxWidth: 400, margin: 2, maxHeight: 700 }}>
-        <CardMedia sx={{ height: 200 }} image={img} title={title} />
+        <CardMedia sx={{ height: 200 }} image={item.image} title={item.title} />
         <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
-            {title}
-            {id}
+            {item.title}
+            {item.key}
           </Typography>
           <Typography variant='body2' color='text.secondary' maxHeight={300}>
-            {description || ''}
+            {item.description || ''}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {`Quedan ${stock}` || '0'}
+            {`Quedan ${item.stock}` || '0'}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {`${price}$`}
+            {`${item.price}$`}
           </Typography>
         </CardContent>
         <Centrado>
           <Button size='small' onClick={handleClick}>Agregar al carrito</Button>
           
-          <Button size='small'>Detalles</Button>
+          <Link to={'/product/' + item.id}> <Button size='small'>Detalles</Button></Link>
         </Centrado>
         <Centrado>
           <Typography variant='body' color='text'>

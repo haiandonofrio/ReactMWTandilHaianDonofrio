@@ -3,50 +3,35 @@ import {
     Box,
     Tab,
     Tabs,
-    Typography,
-    ProductCard,
-    TextField
 } from '@mui/material'
-import SeccionList from '../lista-elementos'
-import SeccionCuchillos from '../../containers/lista-cuchillos'
-import SeccionConjuntos from '../../containers/lista-conjuntos'
-import SeccionCombinados from '../../containers/lista-combinados'
+
 import Container from '../container'
+import { useNavigate } from 'react-router-dom'
 
-export default function TabCat() {
-    const [currentCategory, setCurrentCat] = React.useState('Cuchillo')
 
-    const handleChange = (_, value) => {
-        setCurrentCat(value)
-        //   setInputValue(0)
-    }
-    const selectedsection = selected => {
-        switch (selected) {
-            case 'Cuchillo':
-                return <SeccionCuchillos />
-            case 'Conjunto':
-                return <SeccionConjuntos/>
-            case 'Combinado':
-                return <SeccionCombinados/>
-            default:
-                break
-        }
+export default function TabCat({ current, items }) {
+
+    const navigate = useNavigate();
+
+    const handleChange = (_, newValue) => {
+        navigate('/products/' + newValue)
     }
 
     return (
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Container>
                 <Tabs
-                    value={currentCategory}
+                    value={current}
                     aria-label='tabs productos'
                     onChange={handleChange}
                 >
-                    <Tab label='Cuchillos de Madera' value={'Cuchillo'} />
-                    <Tab label='Conjuntos' value={'Conjunto'} />
-                    <Tab label='Combinados' value={'Combinado'} />
+                    {items?.map((item, index) =>
+                        <Tab key={item.id + index} label={item.title} value={item.id} />
+                    )}
+
                 </Tabs>
             </Container>
-            {selectedsection(currentCategory)}
+
         </Box>
     )
 }
