@@ -36,12 +36,6 @@ const Main = () => {
   }
 
 
-
-  //   const handleChange = (_, value) => {
-  //     setCurrentCat(value)
-  //     setInputValue(0)
-  //     }
-
   return (
     <BrowserRouter>
       <section>
