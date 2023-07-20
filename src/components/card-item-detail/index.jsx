@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 export default function CarditemDetail({ key, item }) {
     console.log(item)
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, marginTop: '50px' }}>
             <CardMedia
                 sx={{ height: 140 }}
                 image={item.thumbnail}
@@ -18,6 +18,9 @@ export default function CarditemDetail({ key, item }) {
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {item.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Quedan : {item.sold_quantity} unidades.
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                    ${item.price}
