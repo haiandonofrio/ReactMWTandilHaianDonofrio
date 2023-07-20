@@ -8,15 +8,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Cartwidget from '../cartwidget';
 import logo from './logo.png'
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-export default function Navbar({cart}) {
+export default function Navbar({ cart }) {
   const navigate = useNavigate();
-   const handleRedirect = () => {
-     navigate('/'); 
+  const handleRedirect = () => {
+    navigate('/');
   }
-  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -36,7 +36,7 @@ export default function Navbar({cart}) {
           <Typography variant="h5" component="div" sx={{ flexGrow: 2 }}>
             MW TANDIL
           </Typography>
-          <Cartwidget CantCarr={cart} />
+          <Link to="/cart" ><Cartwidget CantCarr={cart} /></Link>
         </Toolbar>
       </AppBar>
     </Box>

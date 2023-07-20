@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar'
 import { Box, Tab, Tabs, Typography, ProductCard, TextField } from '@mui/material'
 import TabCat from '../../components/Tabs'
 import { FlexCenterCol } from '../../components/container/contenedor'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ItemContainer from '../../containers/items-container'
 import ItemDetailContainer from '../../containers/item-detail'
 
@@ -48,6 +48,8 @@ const Main = () => {
             <Route path="/" element={<ItemContainer />} />
             <Route path={'/products/:category'} element={<ItemContainer/>}/>
             <Route path={'/product/:id'} element={<ItemDetailContainer />} />
+            <Route path={'/cart'} element={<p>Cart</p>} />
+            <Route path='/*' element={<Navigate to="/" replace={true} />} />
           </Routes>
           <TabCat />
         </FlexCenterCol>

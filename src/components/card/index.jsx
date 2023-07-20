@@ -16,16 +16,9 @@ const maxinput = 20
 export default function Carditem({ key, item }) {
   const [inputValue, setInputValue] = React.useState(0)
   const currentValue = React.useRef({ key })
-  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    console.log(currentValue.current);
-  }, []);
   
-  const handleDetails = (evt) => {
-    console.log(evt )
-    // navigate('/product/' + { id })
-  }
+
   const noStock = () => {
     return alert('No stock')
   }
@@ -43,6 +36,11 @@ export default function Carditem({ key, item }) {
     //   return
     // }
     inputValue > 0 ? setInputValue(inputValue - 1) : setInputValue(0)
+  }
+  const handleAdd = (event) => {
+    console.log(event)
+    setInputValue(0)
+
   }
 
 
@@ -67,15 +65,15 @@ export default function Carditem({ key, item }) {
           </Typography>
         </CardContent>
         <Centrado>
-          <Button size='small' onClick={handleClick}>Agregar al carrito</Button>
-          
+          <Button sx={{ fontSize: "1.5em" }} size='small' onClick={handleClick}>+</Button>
+          <Button sx={{ fontSize: "1.5em" }} size='small' onClick={handleReset}>-</Button>
           <Link to={'/product/' + item.id}> <Button size='small'>Detalles</Button></Link>
         </Centrado>
         <Centrado>
           <Typography variant='body' color='text'>
             Cantidad: {useDebounce(inputValue,500)}
           </Typography>
-          <Button size='small' onClick={handleReset}>Quitar</Button>
+          <Button size='small' onClick={handleAdd}>Agregar al Carrito</Button>
         </Centrado>
       </Card>
     </Box>
