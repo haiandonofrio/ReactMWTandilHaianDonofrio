@@ -26,11 +26,8 @@ export default function ProductList({ items, loading }) {
                         <Carditem
                             key={index + item.title}
                             item={item}
-                            img={item.image}
-                            title={item.title}
-                            stock={item.stock}
-                            price={item.price}
-                            description={item.description}
+                            Showdetail={true}
+                            
                         />
                     )
                 })}

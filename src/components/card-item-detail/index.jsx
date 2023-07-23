@@ -5,29 +5,42 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { CarritoContext } from '../../containers/Context/carrito-context';
+import { Image } from '@mui/icons-material';
 
-export default function CarditemDetail({ key, item }) {
-    console.log(item)
+export default function CarditemDetail({ index, item, onItemDelete }) {
+    const { quantityCart,  deleteItem } = React.useContext(CarritoContext);
+    console.log(item, index)
+
+    const handleClick = () => {
+        console.log(quantityCart);
+        deleteItem(item.id);
+        onItemDelete();
+    }
+
     return (
-        <Card sx={{ maxWidth: 345, marginTop: '50px' }}>
+        <Card sx={{ maxHeight: '20%', marginTop: '50px', display: 'flex', flexDirection: 'row'  }}>
             <CardMedia
-                sx={{ height: 140 }}
+                component="img"
+                height="194"
+                
+                sx={{ maxWidth:"20%" }}
                 image={item.thumbnail}
-                title={item.title}
+                alt={item.title}
             />
-            <CardContent>
+            <CardContent sx={{ display: 'flex', flexDirection: 'row', gap: '15%', alignItems:'center' }}>
                 <Typography gutterBottom variant="h5" component="div">
                     {item.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    Quedan : {item.sold_quantity} unidades.
+                <Typography variant="body2" color="text.secondary" display={'flex'}>
+                    {item.cantidad} unidades.
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                   ${item.price}
+                    ${item.price}
                 </Typography>
             </CardContent>
             <CardActions>
-
+                <Button sx={{ fontSize: "1em" }} size='small' onClick={handleClick}>Quitar del carrito</Button>
             </CardActions>
         </Card>
     );

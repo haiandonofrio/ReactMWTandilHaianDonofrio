@@ -1,10 +1,12 @@
 import React from 'react'
-import ProductList from '../../components/lista-elementos'
 import { useNavigate, useParams } from 'react-router-dom'
-import TabCat from '../../components/Tabs'
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 import { getProd } from '../../sdk/Products'
-import { Box } from '@mui/material'
 import MainText from '../../components/main-text'
+import TabCat from '../../components/Tabs'
+import { Box } from '@mui/material'
+import ProductList from '../../components/lista-elementos'
+
 
 const CatTabs = [{ id: 'all', title: 'Todos los productos' },
 { id: 'Cuchillo', title: 'Cuchillos' },
@@ -18,9 +20,9 @@ const selectedsection = (id) => {
         case 'Cuchillo':
             return 'Cuchillos'
         case 'Conjunto':
-            return 'Conjuntos%20Cuchillos'
+            return 'Conjuntos'
         case 'Combinado':
-            return 'Cuchillos%20Combinados'
+            return 'Combinado'
         default:
             return 'Cuchillos'
     }
@@ -41,36 +43,59 @@ export default function ItemContainer() {
 
 
     }, [category, navigate])
-        
+
     React.useEffect(() => {
         setLoading(true)
-        getProd(selectedsection(category))
-            .then(res => res.json())
-            .then((res) => {
-                const data = res.results?.map((item) => (
-                    {
-                        id: item.id,
-                        title: item.title,
-                        price: item.price,
-                        image: item.thumbnail,
-                        stock: item.sold_quantity,
-                        description: item.title
-                    }
-                ))
-                setitems(data)
-            })
-            .finally(() => {
+        // getProd(selectedsection(category))
+        //     .then(res => res.json())
+        //     .then((res) => {
+        //         const data = res.results?.map((item) => (
+        //             {
+        //                 id: item.id,
+        //                 title: item.title,
+        //                 price: item.price,
+        //                 thumbnail: item.thumbnail,
+        //                 sold_quantity: item.sold_quantity,
+        //                 description: item.title
+        //             }
+        //         ))
+        //         setitems(data)
+        const db = getFirestore();
+        const getCollection = collection(db,'productos')
+        const q = query(collection(db, "productos"), where("categoryID", "==", selectedsection(category)));
+
+        if (category === 'all') {
+            getDocs(getCollection).then((snapshot) => {
+                if (snapshot.size === 0) {
+                    console.log("No hay resultados");
+                }
+
+                setitems(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+            }).finally(() => {
                 setLoading(false)
             })
+        }  else if (CatTabs.some(categories => categories.id === category)) {
+            getDocs(q).then((snapshot) => {
+                if (snapshot.size === 0) {
+                    console.log("No hay resultados");
+                }
+
+                setitems(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+            }).finally(() => {
+                setLoading(false)
+            })
+        }
+
+ 
     }, [category])
-    
+
     return (
         <div>
             <MainText />
             <TabCat current={current} items={CatTabs} />
             <Box>
-                <ProductList items={items} loading={loading}/>
+                <ProductList items={items} loading={loading} />
             </Box>
         </div>
-  )
+    )
 }

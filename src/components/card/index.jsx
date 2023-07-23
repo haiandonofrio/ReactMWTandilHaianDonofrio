@@ -9,15 +9,20 @@ import { Box } from '@mui/material'
 import { Centrado } from '../container/contenedor'
 import { useDebounce } from '../../hooks/useDebounce'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { CarritoContext } from '../../containers/Context/carrito-context'
 
 
 const maxinput = 20
 
-export default function Carditem({ key, item }) {
+export default function Carditem({ key, item , Showdetail }) {
+  const { id, title, description , price, thumbnail, sold_quantity } = item;
   const [inputValue, setInputValue] = React.useState(0)
+  const [stockValue, setStockValue] = React.useState(sold_quantity)
   const currentValue = React.useRef({ key })
 
-  
+  const { carrito, handlerCarrito, handlerItem, quantityCart } = React.useContext(CarritoContext);
+
+  console.log( item ) 
 
   const noStock = () => {
     return alert('No stock')
@@ -25,55 +30,62 @@ export default function Carditem({ key, item }) {
 
   // agregar carrito
   const handleClick = () => {
-    // if (isNaN(inputValue)) {
-    //   return
-    // }
-    inputValue < maxinput ? setInputValue(inputValue + 1) : noStock()
+
+    inputValue < stockValue ? setInputValue(inputValue + 1) : noStock()
   }
 
   const handleReset = () => {
-    // if (isNaN(inputValue)) {
-    //   return
-    // }
+
     inputValue > 0 ? setInputValue(inputValue - 1) : setInputValue(0)
   }
   const handleAdd = (event) => {
     console.log(event)
     setInputValue(0)
-
+    let valor = parseInt(stockValue - inputValue);
+    setStockValue(valor)
+    valor = inputValue + carrito;
+    handlerCarrito(valor);
+    handlerItem({
+      id: id,
+      title: title,
+      cantidad: inputValue,
+      price: price * inputValue,
+      thumbnail: thumbnail,
+    });
   }
-
-
 
   return (
     <Box>
       <Card sx={{ maxWidth: 400, margin: 2, maxHeight: 700 }}>
-        <CardMedia sx={{ height: 200 }} image={item.image} title={item.title} />
+        <CardMedia sx={{ height: 200 }} image={thumbnail} title={title} />
         <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
-            {item.title}
-            {item.key}
+            {title}
+            {key}
           </Typography>
           <Typography variant='body2' color='text.secondary' maxHeight={300}>
-            {item.description || ''}
+            {description || ''}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {`Quedan ${item.stock}` || '0'}
+            {`Quedan ${stockValue || sold_quantity}` || '0'}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {`${item.price}$`}
+            {`${price}$`}
           </Typography>
         </CardContent>
         <Centrado>
           <Button sx={{ fontSize: "1.5em" }} size='small' onClick={handleClick}>+</Button>
           <Button sx={{ fontSize: "1.5em" }} size='small' onClick={handleReset}>-</Button>
-          <Link to={'/product/' + item.id}> <Button size='small'>Detalles</Button></Link>
+          {Showdetail ?
+            <Link to={'/product/' + id}> <Button size='small'>Detalles</Button></Link> : null}
         </Centrado>
         <Centrado>
           <Typography variant='body' color='text'>
             Cantidad: {useDebounce(inputValue,500)}
           </Typography>
           <Button size='small' onClick={handleAdd}>Agregar al Carrito</Button>
+
+          { !Showdetail && quantityCart ? <Link to={'/cart'}> <Button size='small'>Ver Carrito</Button></Link> : null }
         </Centrado>
       </Card>
     </Box>

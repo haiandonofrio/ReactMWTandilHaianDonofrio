@@ -8,6 +8,9 @@ import { FlexCenterCol } from '../../components/container/contenedor'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ItemContainer from '../../containers/items-container'
 import ItemDetailContainer from '../../containers/item-detail'
+import ContainerContextProvider from '../../containers/Context'
+import { CarritoContext, Provider } from '../../containers/Context/carrito-context'
+import CartComponent from '../../components/carrito'
 
 
 
@@ -39,8 +42,8 @@ const Main = () => {
   return (
     <BrowserRouter>
       <section>
-
-        <Navbar cart={inputValue} />
+        <ContainerContextProvider>
+          <Navbar cart={0} />
 
         <FlexCenterCol sx={{ backgroundColor: 'white' }}>
           
@@ -48,11 +51,12 @@ const Main = () => {
             <Route path="/" element={<ItemContainer />} />
             <Route path={'/products/:category'} element={<ItemContainer/>}/>
             <Route path={'/product/:id'} element={<ItemDetailContainer />} />
-            <Route path={'/cart'} element={<p>Cart</p>} />
+              <Route path={'/cart'} element={<CartComponent/>} />
             <Route path='/*' element={<Navigate to="/" replace={true} />} />
           </Routes>
           <TabCat />
-        </FlexCenterCol>
+          </FlexCenterCol>
+        </ContainerContextProvider>
       </section>
     </BrowserRouter >
   )

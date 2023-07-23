@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,9 +9,14 @@ import Cartwidget from '../cartwidget';
 import logo from './logo.png'
 import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { CarritoContext } from '../../containers/Context/carrito-context';
 
 
 export default function Navbar({ cart }) {
+
+  const { carrito, handlerCarrito, quantityCart } = React.useContext(CarritoContext);
+
+
   const navigate = useNavigate();
   const handleRedirect = () => {
     navigate('/');
@@ -36,7 +41,7 @@ export default function Navbar({ cart }) {
           <Typography variant="h5" component="div" sx={{ flexGrow: 2 }}>
             MW TANDIL
           </Typography>
-          <Link to="/cart" ><Cartwidget CantCarr={cart} /></Link>
+          <Link to="/cart" >{quantityCart ? <Cartwidget CantCarr={quantityCart} /> : null} </Link>
         </Toolbar>
       </AppBar>
     </Box>
