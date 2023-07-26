@@ -14,7 +14,7 @@ export default function CarditemDetail({ index, item, onItemDelete }) {
 
     const handleClick = () => {
         console.log(quantityCart);
-        deleteItem(item.id);
+        deleteItem(index);
         onItemDelete();
     }
 

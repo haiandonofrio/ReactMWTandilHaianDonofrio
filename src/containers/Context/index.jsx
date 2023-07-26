@@ -15,8 +15,8 @@ export default function ContainerContextProvider({ children }) {
         setItem([...item,nuevoValor])
     }
 
-    const deleteItem = (id) => {
-        setItem(prevData => prevData.filter(item => item.id !== id));
+    const deleteItem = (index) => {
+        setItem(item.filter((item, i) => i !== index));
     }
 
     console.log(CarritoContext);
