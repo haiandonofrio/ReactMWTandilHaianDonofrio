@@ -11,7 +11,7 @@ El mismo está desarrollado a partir de JavaScript y busca generar una experienc
 ***
 Lista de las tecnologías utilizadas en el proyecto:
 
-- [Create React App](https://github.com/facebook/create-react-app):18.2.0
+- [Create React App](https://react.dev):18.2.0
 - [MUI](https://mui.com/core/): 5.14.2
 - [Firebase](https://firebase.google.com/): 9.15.0
 - [SweetAlert2](https://sweetalert2.github.io) : 11.7.20
