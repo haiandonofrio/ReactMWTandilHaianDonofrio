@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { collection, getDocs, getFirestore, limit, query, where } from "firebase/firestore"
-import { getProd } from '../../sdk/Products'
 import MainText from '../../components/main-text'
 import TabCat from '../../components/Tabs'
 import { Box } from '@mui/material'
@@ -18,7 +17,7 @@ const CatTabs = [{ id: 'all', title: 'Todos los productos' },
 const selectedsection = (id) => {
     switch (id) {
         case 'all':
-        // return <
+            break;
         case 'Cuchillo':
             return 'Cuchillos'
         case 'Conjunto':

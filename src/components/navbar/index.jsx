@@ -12,9 +12,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { CarritoContext } from '../../containers/Context/carrito-context';
 
 
-export default function Navbar({ cart }) {
+export default function Navbar() {
 
-  const { carrito, handlerCarrito, quantityCart } = React.useContext(CarritoContext);
+  const { quantityCart } = React.useContext(CarritoContext);
 
 
   const navigate = useNavigate();
