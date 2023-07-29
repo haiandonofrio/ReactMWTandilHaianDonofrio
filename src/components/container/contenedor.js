@@ -1,4 +1,4 @@
-import { Box, styled } from "@mui/material";
+import { Box, Button, styled } from "@mui/material";
 
 export const Contenedor = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -6,9 +6,10 @@ export const Contenedor = styled(Box)(({ theme }) => ({
   gap: 2,
   flexWrap: "wrap",
   flexDirection: "row",
+  // maxWidth: "700px",
   // backgroundColor: "red",
   [theme.breakpoints.down(470)]: {
-    maxWidth: "800px",
+    maxWidth: "700px",
     flexDirection: "column"
   }
 }));
@@ -29,4 +30,15 @@ export const FlexCenterCol = styled(Box)(({ theme }) => ({
   flexWrap: "wrap",
   flexDirection: "column",
   paddingBottom: 2,
+  textAlign: "center",
+  alignItems: "center",
+}));
+
+export const ColorButton = styled(Button)(({ theme }) => ({
+  fontSize: '1.2em',
+  backgroundColor: "white",
+  '&:hover': {
+    backgroundColor: '#9ca5d2',
+    color: '#fff'
+  },
 }));

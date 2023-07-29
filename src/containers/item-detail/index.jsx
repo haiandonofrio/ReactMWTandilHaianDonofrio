@@ -11,18 +11,13 @@ export default function ItemDetailContainer() {
 
     React.useEffect(() => {
         setLoading(true)
-        // getItem(id)
-        //     .then(res => res.json())
-        //     .then((res) => {
-        //         setitems(res)
-        //     })
         const db = getFirestore();
         const getProduct = doc(db, 'productos', id)
         getDoc(getProduct).then((snapshot) => {
             if (snapshot.exists()) {
                 setitems({ id: snapshot.id, ...snapshot.data() })
             }
-            })
+        })
             .finally(() => {
                 setLoading(false)
             })

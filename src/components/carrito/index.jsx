@@ -2,7 +2,8 @@ import React from 'react'
 import { CarritoContext } from '../../containers/Context/carrito-context';
 import CarditemDetail from '../card-item-detail';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
+import UserInfo from '../user-info';
 
 export default function CartComponent() {
     const [count, setCount] = React.useState(0);
@@ -12,11 +13,10 @@ export default function CartComponent() {
         setCount(prevCount => prevCount + 1);
     };
 
-    const { carrito, handlerCarrito, item } = React.useContext(CarritoContext);
-    console.log(item);
-    console.log('render')
-    
-    if (item.length === 0 ) {
+    const { item, createNewOrder, lastOrder } = React.useContext(CarritoContext);
+
+
+    if (item.length === 0) {
         return (
             <>No hay items en el carro
                 <Link to={'/'}> <Button size='small'>Volver a comprar</Button></Link>
@@ -24,13 +24,17 @@ export default function CartComponent() {
         )
     }
     return (
-        
-        item?.map((items, index) => {
-            return(
-                <CarditemDetail index={index}
+        <>
+            {item.map((items, index) => (
+                <CarditemDetail
+                    key={index}
+                    index={index}
                     item={items}
-                    onItemDelete={handleItemDelete}/>
-            ) 
-        })
-    )
+                    onItemDelete={handleItemDelete}
+                />
+            ))}
+            <UserInfo item={item} createNewOrder={createNewOrder} lastOrder={lastOrder} onItemDelete={handleItemDelete} />
+        </>
+
+    );
 }

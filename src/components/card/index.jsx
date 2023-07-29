@@ -6,26 +6,27 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/material'
-import { Centrado } from '../container/contenedor'
+import { Centrado, ColorButton, FlexCenterCol } from '../container/contenedor'
 import { useDebounce } from '../../hooks/useDebounce'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { CarritoContext } from '../../containers/Context/carrito-context'
+import Swal from 'sweetalert2'
 
 
-const maxinput = 20
-
-export default function Carditem({ key, item , Showdetail }) {
-  const { id, title, description , price, thumbnail, sold_quantity } = item;
+export default function Carditem({ item, Showdetail }) {
+  const { id, title, description, price, thumbnail, sold_quantity, categoryID } = item;
   const [inputValue, setInputValue] = React.useState(0)
   const [stockValue, setStockValue] = React.useState(sold_quantity)
-  const currentValue = React.useRef({ key })
 
   const { carrito, handlerCarrito, handlerItem, quantityCart } = React.useContext(CarritoContext);
 
-  console.log( item ) 
 
   const noStock = () => {
-    return alert('No stock')
+    return Swal.fire(
+      'Lo sentimos',
+      `No hay más stock del producto elegido`,
+      'error'
+    );
   }
 
   // agregar carrito
@@ -39,7 +40,6 @@ export default function Carditem({ key, item , Showdetail }) {
     inputValue > 0 ? setInputValue(inputValue - 1) : setInputValue(0)
   }
   const handleAdd = (event) => {
-    console.log(event)
     setInputValue(0)
     let valor = parseInt(stockValue - inputValue);
     setStockValue(valor)
@@ -51,17 +51,17 @@ export default function Carditem({ key, item , Showdetail }) {
       cantidad: inputValue,
       price: price * inputValue,
       thumbnail: thumbnail,
+      categoryID: categoryID,
     });
   }
 
   return (
     <Box>
       <Card sx={{ maxWidth: 400, margin: 2, maxHeight: 700 }}>
-        <CardMedia sx={{ height: 200 }} image={thumbnail} title={title} />
+        <CardMedia component="img" sx={{ height: 200 }} image={thumbnail} title={title} alt={title} />
         <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
             {title}
-            {key}
           </Typography>
           <Typography variant='body2' color='text.secondary' maxHeight={300}>
             {description || ''}
@@ -74,19 +74,19 @@ export default function Carditem({ key, item , Showdetail }) {
           </Typography>
         </CardContent>
         <Centrado>
-          <Button sx={{ fontSize: "1.5em" }} size='small' onClick={handleClick}>+</Button>
-          <Button sx={{ fontSize: "1.5em" }} size='small' onClick={handleReset}>-</Button>
+          <ColorButton sx={{ fontSize: "1.5em" }} size='small' onClick={handleClick}>+</ColorButton>
+          <ColorButton sx={{ fontSize: "1.5em" }} size='small' onClick={handleReset}>-</ColorButton>
           {Showdetail ?
-            <Link to={'/product/' + id}> <Button size='small'>Detalles</Button></Link> : null}
+            <Link to={'/product/' + id}> <ColorButton size='small'>Detalles</ColorButton></Link> : null}
         </Centrado>
-        <Centrado>
-          <Typography variant='body' color='text'>
-            Cantidad: {useDebounce(inputValue,500)}
+        <FlexCenterCol>
+          <Typography variant='body' color='text' fontSize='1em'>
+            Cantidad: {useDebounce(inputValue, 200)}
           </Typography>
-          <Button size='small' onClick={handleAdd}>Agregar al Carrito</Button>
+          <ColorButton size='small' onClick={handleAdd}>Agregar al Carrito</ColorButton>
 
-          { !Showdetail && quantityCart ? <Link to={'/cart'}> <Button size='small'>Ver Carrito</Button></Link> : null }
-        </Centrado>
+          {!Showdetail && quantityCart ? <Link to={'/cart'}> <Button size='small'>Ver Carrito</Button></Link> : null}
+        </FlexCenterCol>
       </Card>
     </Box>
   )

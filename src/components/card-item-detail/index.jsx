@@ -6,29 +6,27 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CarritoContext } from '../../containers/Context/carrito-context';
-import { Image } from '@mui/icons-material';
+import { ColorButton } from '../container/contenedor';
 
 export default function CarditemDetail({ index, item, onItemDelete }) {
-    const { quantityCart,  deleteItem } = React.useContext(CarritoContext);
-    console.log(item, index)
+    const { quantityCart, deleteItem } = React.useContext(CarritoContext);
 
     const handleClick = () => {
-        console.log(quantityCart);
         deleteItem(index);
         onItemDelete();
     }
 
     return (
-        <Card sx={{ maxHeight: '20%', marginTop: '50px', display: 'flex', flexDirection: 'row'  }}>
+        <Card sx={{ maxHeight: '20%', marginTop: '50px', display: 'flex', flexDirection: 'row' }}>
             <CardMedia
                 component="img"
                 height="194"
-                
-                sx={{ maxWidth:"20%" }}
+
+                sx={{ maxWidth: "20%" }}
                 image={item.thumbnail}
                 alt={item.title}
             />
-            <CardContent sx={{ display: 'flex', flexDirection: 'row', gap: '15%', alignItems:'center' }}>
+            <CardContent sx={{ display: 'flex', flexDirection: 'row', gap: '15%', alignItems: 'center' }}>
                 <Typography gutterBottom variant="h5" component="div">
                     {item.title}
                 </Typography>
@@ -40,7 +38,7 @@ export default function CarditemDetail({ index, item, onItemDelete }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button sx={{ fontSize: "1em" }} size='small' onClick={handleClick}>Quitar del carrito</Button>
+                <ColorButton sx={{ fontSize: "1em" }} size='small' onClick={handleClick}>Quitar del carrito</ColorButton>
             </CardActions>
         </Card>
     );
