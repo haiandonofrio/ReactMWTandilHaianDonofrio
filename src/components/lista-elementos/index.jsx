@@ -1,14 +1,3 @@
-import {
-    Box,
-    Tab,
-    Tabs,
-    Typography,
-    ProductCard,
-    TextField,
-    Card,
-    LinearProgress,
-    styled,
-} from '@mui/material'
 import React from 'react'
 import Carditem from '../card'
 import CircularProgressTabs from '../circular-progress'

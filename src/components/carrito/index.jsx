@@ -6,7 +6,7 @@ import { Button, Stack } from '@mui/material';
 import UserInfo from '../user-info';
 
 export default function CartComponent() {
-    const [count, setCount] = React.useState(0);
+    const [setCount] = React.useState(0);
 
     const handleItemDelete = () => {
         // Update the parent component state when an item is deleted

@@ -6,8 +6,6 @@ export const Contenedor = styled(Box)(({ theme }) => ({
   gap: 2,
   flexWrap: "wrap",
   flexDirection: "row",
-  // maxWidth: "700px",
-  // backgroundColor: "red",
   [theme.breakpoints.down(470)]: {
     maxWidth: "700px",
     flexDirection: "column"

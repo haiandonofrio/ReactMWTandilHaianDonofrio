@@ -8,7 +8,6 @@ import ItemContainer from '../../containers/items-container'
 import ItemDetailContainer from '../../containers/item-detail'
 import ContainerContextProvider from '../../containers/Context'
 import CartComponent from '../../components/carrito'
-import MainText from '../../components/main-text'
 
 
 

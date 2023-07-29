@@ -2,7 +2,6 @@ import React from 'react'
 import ItemDetail from '../../components/item-detail'
 import { useParams } from 'react-router-dom';
 import { doc, getDoc, getFirestore } from "firebase/firestore"
-import { getItem } from '../../sdk/Products';
 
 export default function ItemDetailContainer() {
     const [item, setitems] = React.useState([])
