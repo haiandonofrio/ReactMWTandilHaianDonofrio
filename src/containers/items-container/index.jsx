@@ -78,6 +78,7 @@ export default function ItemContainer() {
 
     }, [category])
 
+    
     return (
         <div>
             <MainText />

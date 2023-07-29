@@ -15,7 +15,7 @@ export default function ContainerContextProvider({ children }) {
         }
 
         let maxQ = items[0].cantidad; // Initialize maxQ with the first item's q value
-        let maxId = items[0].id; // Initialize maxId with the first item's id
+        let maxId = items[0].categoryID; // Initialize maxId with the first item's id
 
         // Iterate through the array starting from the second item
         for (let i = 1; i < items.length; i++) {
@@ -57,6 +57,7 @@ export default function ContainerContextProvider({ children }) {
         const orders = collection(db, 'orders');
         const batch = writeBatch(db);
         const MaxId = findItemWithHighestQ(order.items)
+        console.log(MaxId , order.items)
         Boolean(MaxId) && setRecomend(MaxId);
         addDoc(orders, order)
             .then((snapshot) => {
