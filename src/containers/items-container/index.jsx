@@ -17,7 +17,7 @@ const CatTabs = [{ id: 'all', title: 'Todos los productos' },
 const selectedsection = (id) => {
     switch (id) {
         case 'all':
-            break;
+        // return <
         case 'Cuchillo':
             return 'Cuchillos'
         case 'Conjunto':
